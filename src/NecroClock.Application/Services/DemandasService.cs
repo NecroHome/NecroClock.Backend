@@ -71,7 +71,7 @@ namespace NecroClock.Application.Services
 
             if (dto.NumeroDemanda != model.NumeroDemanda)
             {
-                List<DemandaModel> demandas = await _demandaRepositorie.GetDemandasByNumeroDemanda(dto.NumeroDemanda, userID);
+                List<DemandaModel> demandas = await _demandaRepositorie.GetDemandasByNumeroDemanda(model.NumeroDemanda, userID);
                 foreach (DemandaModel demanda in demandas)
                 {
                     demanda.NumeroDemanda = dto.NumeroDemanda;
