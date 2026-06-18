@@ -75,15 +75,9 @@ namespace NecroClock.Application.Services
                 foreach (DemandaModel demanda in demandas)
                 {
                     demanda.NumeroDemanda = dto.NumeroDemanda;
-                    demanda.Descricao = dto.Descricao;
-                    demanda.Data = dto.Data;
-                    demanda.Horas = dto.Horas;
-                    demanda.SQL = dto.SQL;
-                    demanda.Anotacoes = dto.Anotacoes;
                 }
 
                 await _demandaRepositorie.UpdateDemanda(demandas);
-                return true;
             }
 
             model.NumeroDemanda = dto.NumeroDemanda;
