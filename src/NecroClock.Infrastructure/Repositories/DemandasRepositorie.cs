@@ -39,6 +39,13 @@ namespace NecroClock.Infrastructure.Repositories
             return true;
         }
 
+        public async Task<bool> UpdateDemanda(List<DemandaModel> demandas)
+        {
+            _context.Demandas.UpdateRange(demandas);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
         public async Task<bool> DeleteDemanda(DemandaModel model)
         {
             _context.Demandas.Remove(model);
@@ -74,6 +81,15 @@ namespace NecroClock.Infrastructure.Repositories
                     w.NumeroDemanda == numeroDemanda &&
                     w.UserId == userID)
                 .FirstOrDefaultAsync();
+        }
+
+        public async Task<List<DemandaModel>> GetDemandasByNumeroDemanda(string numeroDemanda, long userID)
+        {
+            return await _context.Demandas
+                .Where(w =>
+                    w.NumeroDemanda == numeroDemanda &&
+                    w.UserId == userID)
+                .ToListAsync();
         }
     }
 }

@@ -69,6 +69,24 @@ namespace NecroClock.Application.Services
                 throw new Exception("Demanda não encontrada.");
             }
 
+            if (dto.NumeroDemanda != model.NumeroDemanda)
+            {
+                List<DemandaModel> demandas = await _demandaRepositorie.GetDemandasByNumeroDemanda(dto.NumeroDemanda, userID);
+                foreach (DemandaModel demanda in demandas)
+                {
+                    demanda.NumeroDemanda = dto.NumeroDemanda;
+                    demanda.Descricao = dto.Descricao;
+                    demanda.Data = dto.Data;
+                    demanda.Horas = dto.Horas;
+                    demanda.SQL = dto.SQL;
+                    demanda.Anotacoes = dto.Anotacoes;
+                }
+
+                await _demandaRepositorie.UpdateDemanda(demandas);
+                return true;
+            }
+
+            model.NumeroDemanda = dto.NumeroDemanda;
             model.Descricao = dto.Descricao;
             model.Data = dto.Data;
             model.Horas = dto.Horas;
